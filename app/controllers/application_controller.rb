@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
+  
+  def counts(user)
+    @count_workoutlogs = user.workoutlogs.count
+  end
+  
 end

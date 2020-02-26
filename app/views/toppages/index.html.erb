@@ -1,11 +1,27 @@
 <% if logged_in? %>
-  <p>こんにちは！<%= current_user.name %>さん！</p>
+  <div>
+    <p>こんにちは！<%= current_user.name %>さん！</p>
+    <p>今日も頑張りましょう！</p>
+  </div>
+  <div class="row">
+    <aside class="col-sm-4">
+      <%= form_with(model: @workoutlog, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, class: 'form-control', rows: 5 %>
+        </div>
+        <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </aside>
+    <div class="col-sm-8">
+      <%= render 'workoutlogs/workoutlogs', workoutlogs: @workoutlogs %>
+    </div>
+  </div>
 <% else %>
   <div class="center jumbotron">
     <div class="text-center">
-      <h1>Welcome!!</h1>
-      <h1>Let's start Workout !!</h1>
-      <%= link_to 'Sign up now!!', signup_path, class: 'btn btn-lg btn-primary' %>
+      <h1>Welcome to the WorkOutLogs!!</h1>
+      <h1>Let's start to WorkOut!</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
     </div>
   </div>
 <% end %>

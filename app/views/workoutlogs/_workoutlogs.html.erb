@@ -1,0 +1,19 @@
+<ul class="list-unstyled">
+  <% workoutlogs.each do |workoutlog| %>
+    <li class="mb-3">
+      <div class="card">
+        <div class="card-header">
+          <img class="mr-2 rounded" src="<%= gravatar_url(workoutlog.user, { size: 50 }) %>" alt="">
+          <%= link_to workoutlog.user.name, user_path(workoutlog.user) %> <span class="text-muted">recorded by <%= workoutlog.created_at %></span>
+        </div>
+        <div class="card-body">
+          <p class="mb-0"><%= workoutlog.content %></p>
+          <% if current_user == workoutlog.user %>
+            <%= link_to "削除", workoutlog, method: :delete, data: { confirm: "本当にこのworkoutlogを削除しますか？" }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <%= paginate workoutlogs %>
+</ul>

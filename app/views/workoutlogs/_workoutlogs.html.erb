@@ -8,6 +8,7 @@
         </div>
         <div class="card-body">
           <p class="mb-0"><%= workoutlog.content %></p>
+          <%= render 'favorites/favorites_button', workoutlog: workoutlog %>
           <% if current_user == workoutlog.user %>
             <%= link_to "削除", workoutlog, method: :delete, data: { confirm: "本当にこのworkoutlogを削除しますか？" }, class: 'btn btn-danger btn-sm' %>
           <% end %>

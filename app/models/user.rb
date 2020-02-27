@@ -34,4 +34,20 @@ class User < ApplicationRecord
         Workoutlog.where(user_id: self.following_ids + [self.id])
     end
     
+    #お気に入り機能
+    has_many :favorites
+    has_many :likes, through: :favorites, source: :workoutlog
+    
+    def like(other_workoutlog)
+        self.favorites.find_or_create_by(workoutlog_id: other_workoutlog.id)
+    end
+    
+    def unlike(other_workoutlog)
+        favorite = self.favorites.find_by(workoutlog_id: other_workoutlog.id)
+        favorite.destroy if favorite
+    end
+        
+    def like?(other_workoutlog)
+        self.likes.include?(other_workoutlog)
+    end
 end

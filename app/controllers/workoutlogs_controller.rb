@@ -8,7 +8,7 @@ class WorkoutlogsController < ApplicationController
       flash[:success] = 'お疲れ様です！work out log を記録しました！'
       redirect_to root_url
     else 
-      @workoutlogs = current_user.workoutlogs.order(id: :desc).page([params])
+      @workoutlogs = current_user.feed_workoutlogs.order(id: :desc).page([params])
       flash[:danger] = 'work out log を記録できませんでした'
       render 'toppage#index'
     end
